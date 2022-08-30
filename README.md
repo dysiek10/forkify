@@ -1,3 +1,4 @@
-# forkify
-
-Link to Github Pages(work in progress): https://dysiek10.github.io/forkify/
+# Recipes application.
+Link to Github Pages: https://dysiek10.github.io/forkify/
+#
+Work in progress.
