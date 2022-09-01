@@ -26,7 +26,7 @@ async function controlRecipes() {
     // if we exported the entire class
     // const recipeView = new recipeView(model.state.recipe);
   } catch (err) {
-    console.log(err);
+    recipeView.renderError();
   }
 }
 
