@@ -26,12 +26,13 @@ async function controlRecipes() {
     // if we exported the entire class
     // const recipeView = new recipeView(model.state.recipe);
   } catch (err) {
-    alert(err);
+    console.log(err);
   }
 }
 
-['hashchange', 'load'].forEach(ev =>
-  window.addEventListener(ev, controlRecipes)
-);
-// window.addEventListener('hashchange', controlRecipes);
-// window.addEventListener('load', controlRecipes);
+//publisher-subscriber pattern
+function init() {
+  recipeView.addHandlerRender(controlRecipes);
+}
+
+init();
