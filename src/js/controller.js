@@ -3,16 +3,12 @@ import 'regenerator-runtime/runtime';
 
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
-
-const recipeContainer = document.querySelector('.recipe');
-
-///////////////////////////////////////
+import searchView from './views/searchView.js';
 
 async function controlRecipes() {
   try {
     // window.location - entire URL
     const id = window.location.hash.slice(1);
-    console.log(id);
 
     // guard clause - modern way
     if (!id) return;
@@ -30,9 +26,26 @@ async function controlRecipes() {
   }
 }
 
+async function controlSearchResults() {
+  try {
+    // 1) Get search query
+    const query = searchView.getQuery();
+    if (!query) return;
+
+    // 2) Load search
+    await model.loadSearchResults(query);
+
+    // 3) Render results
+    console.log(model.state.search.results);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 //publisher-subscriber pattern
 function init() {
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
 }
 
 init();
