@@ -19,11 +19,9 @@ export default class View {
 
     const newDOM = document.createRange().createContextualFragment(newMarkup);
     const newElements = Array.from(newDOM.querySelectorAll('*'));
-    // console.log(newElements);
 
     // virtual DOM - what would get rendered if we used render method
     const curElements = Array.from(this._parentElement.querySelectorAll('*'));
-    // console.log(curElements);
 
     // compare virtual DOM to actuall DOM
     newElements.forEach((newEl, i) => {
