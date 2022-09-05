@@ -8,9 +8,9 @@ import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
 
 // parcel - keeps the state of the page
-// if (module.hot) {
-//   module.hot.accept();
-// }
+if (module.hot) {
+  module.hot.accept();
+}
 
 async function controlRecipes() {
   try {
@@ -25,9 +25,7 @@ async function controlRecipes() {
     await model.loadRecipe(id);
 
     // 2) Rendering recipe
-    resultsView.render(model.getSearchResultsPage());
-    // if we exported the entire class
-    // const recipeView = new recipeView(model.state.recipe);
+    recipeView.render(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
   }
@@ -62,9 +60,19 @@ function controlPagination(goToPage) {
   paginationView.render(model.state.search);
 }
 
+// control... - event handler
+function controlServings(newServings) {
+  // Update the recipe servings (in state)
+  model.updateServings(newServings);
+
+  // Update the recipe view
+  recipeView.render(model.state.recipe);
+}
+
 //publisher-subscriber pattern
 function init() {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 }
