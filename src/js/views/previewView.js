@@ -4,7 +4,7 @@ import View from './View.js';
 class PreviewView extends View {
   _parentElement = '';
 
-  _generateMarkupPreview() {
+  _generateMarkup() {
     const id = window.location.hash.slice(1);
 
     return `
